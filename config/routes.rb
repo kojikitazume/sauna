@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'saunas#index'
   
   resources :saunas, only: [:index, :show] do
