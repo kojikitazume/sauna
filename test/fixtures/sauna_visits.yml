@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  sauna: one
+  sauna_time: 1
+  water_time: 1
+  cooldown_time: 1
+  comment: MyText
+
+two:
+  user: two
+  sauna: two
+  sauna_time: 1
+  water_time: 1
+  cooldown_time: 1
+  comment: MyText
