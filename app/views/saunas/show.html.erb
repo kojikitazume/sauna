@@ -1,2 +1,35 @@
-<h1>Saunas#show</h1>
-<p>Find me in app/views/saunas/show.html.erb</p>
+<h1><%= @sauna.name %></h1>
+
+<p>場所: <%= @sauna.location %></p>
+<p>サウナ温度: <%= @sauna.sauna_temperature %>℃</p>
+<p>水風呂温度: <%= @sauna.water_temperature %>℃</p>
+
+<h2>平均サ活時間</h2>
+<p>サウナ: <%= @average_times.avg_sauna.to_i %>分</p>
+<p>水風呂: <%= @average_times.avg_water.to_i %>分</p>
+<p>外気浴: <%= @average_times.avg_cooldown.to_i %>分</p>
+
+<h2>サ活を記録する</h2>
+<%= form_with(model: [@sauna, @sauna_visit], local: true) do |f| %>
+  <%= f.hidden_field :sauna_id, value: @sauna.id %>
+  
+  <%= f.label :sauna_time, 'サウナ時間（分）' %>
+  <%= f.number_field :sauna_time %>
+  
+  <%= f.label :water_time, '水風呂時間（分）' %>
+  <%= f.number_field :water_time %>
+  
+  <%= f.label :cooldown_time, '外気浴時間（分）' %>
+  <%= f.number_field :cooldown_time %>
+  
+  <%= f.label :comment, 'コメント' %>
+  <%= f.text_area :comment %>
+  
+  <%= f.submit 'サ活を記録' %>
+<% end %>
+
+<% if current_user.bookmarks.exists?(sauna: @sauna) %>
+  <%= button_to '保存を解除', sauna_bookmark_path(@sauna), method: :delete %>
+<% else %>
+  <%= button_to '保存する', sauna_bookmark_path(@sauna), method: :post %>
+<% end %>

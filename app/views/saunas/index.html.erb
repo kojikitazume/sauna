@@ -1,2 +1,10 @@
-<h1>Saunas#index</h1>
-<p>Find me in app/views/saunas/index.html.erb</p>
+<h1>サウナ施設一覧</h1>
+
+<% @saunas.each do |sauna| %>
+  <div>
+    <h2><%= link_to sauna.name, sauna_path(sauna) %></h2>
+    <p>場所: <%= sauna.location %></p>
+    <p>サウナ温度: <%= sauna.sauna_temperature %>℃</p>
+    <p>水風呂温度: <%= sauna.water_temperature %>℃</p>
+  </div>
+<% end %>
