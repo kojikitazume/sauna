@@ -1,53 +1,54 @@
-<%= form_with url: saunas_path, method: :get, local: true do |f| %>
-    <div>
+<%= form_with url: saunas_path, method: :get, local: true, class: 'search-form' do |f| %>
+    <div class="form-group">
       <%= f.label :query, '検索:' %>
-      <%= f.text_field :query, value: params[:query] %>
+      <%= f.text_field :query, class: 'form-control', placeholder: '施設名や場所で検索', value: params[:query] %>
     </div>
   
-    <div>
+    <div class="form-group">
       <%= f.label :temperature_min, 'サウナ温度の最小値:' %>
-      <%= f.number_field :temperature_min, value: params[:temperature_min], step: 1 %>
+      <%= f.number_field :temperature_min, class: 'form-control', value: params[:temperature_min], step: 1 %>
     </div>
   
-    <div>
+    <div class="form-group">
       <%= f.label :temperature_max, 'サウナ温度の最大値:' %>
-      <%= f.number_field :temperature_max, value: params[:temperature_max], step: 1 %>
+      <%= f.number_field :temperature_max, class: 'form-control', value: params[:temperature_max], step: 1 %>
     </div>
   
-    <div>
+    <div class="form-group">
       <%= f.label :location, '場所:' %>
-      <%= f.text_field :location, value: params[:location] %>
+      <%= f.text_field :location, class: 'form-control', placeholder: '例: 東京都新宿区', value: params[:location] %>
     </div>
   
-    <div>
+    <div class="form-group">
       <%= f.label :has_hot_spring, '温泉の有無:' %>
-      <%= f.select :has_hot_spring, options_for_select([['有り', 'true'], ['無し', 'false']], params[:has_hot_spring]) %>
+      <%= f.select :has_hot_spring, options_for_select([['有り', 'true'], ['無し', 'false']], params[:has_hot_spring]), {}, class: 'form-control' %>
     </div>
   
-    <div>
+    <div class="form-group">
       <%= f.label :rolyu, 'ロウリュー:' %>
-      <%= f.select :rolyu, options_for_select([['有り', 'true'], ['無し', 'false']], params[:rolyu]) %>
+      <%= f.select :rolyu, options_for_select([['有り', 'true'], ['無し', 'false']], params[:rolyu]), {}, class: 'form-control' %>
     </div>
   
-    <div>
+    <div class="form-group">
       <%= f.label :aufguss, 'アウフグース:' %>
-      <%= f.select :aufguss, options_for_select([['有り', 'true'], ['無し', 'false']], params[:aufguss]) %>
+      <%= f.select :aufguss, options_for_select([['有り', 'true'], ['無し', 'false']], params[:aufguss]), {}, class: 'form-control' %>
     </div>
   
-    <%= f.submit '検索' %>
+    <%= f.submit '検索', class: 'btn btn-primary' %>
   <% end %>
   
-  <h1>サウナ一覧</h1>
+  <h1 class="page-title">サウナ一覧</h1>
   
-  <% @saunas.each do |sauna| %>
-    <div>
-      <h2><%= link_to sauna.name, sauna_path(sauna) %></h2>
-      <p>場所: <%= sauna.location %></p>
-      <p>サウナ温度: <%= sauna.sauna_temperature %>℃</p>
-      <p>水風呂温度: <%= sauna.water_temperature %>℃</p>
-      <p>ロウリュー: <%= sauna.rolyu ? '有り' : '無し' %></p>
-      <p>アウフグース: <%= sauna.aufguss ? '有り' : '無し' %></p>
-      <p>温泉の有無: <%= sauna.has_hot_spring ? '有り' : '無し' %></p>
-    </div>
-  <% end %>
-  
+  <div class="sauna-list">
+    <% @saunas.each do |sauna| %>
+      <div class="sauna-card">
+        <h2><%= link_to sauna.name, sauna_path(sauna), class: 'sauna-name' %></h2>
+        <p><strong>場所:</strong> <%= sauna.location %></p>
+        <p><strong>サウナ温度:</strong> <%= sauna.sauna_temperature %>℃</p>
+        <p><strong>水風呂温度:</strong> <%= sauna.water_temperature %>℃</p>
+        <p><strong>ロウリュー:</strong> <%= sauna.rolyu ? '有り' : '無し' %></p>
+        <p><strong>アウフグース:</strong> <%= sauna.aufguss ? '有り' : '無し' %></p>
+        <p><strong>温泉の有無:</strong> <%= sauna.has_hot_spring ? '有り' : '無し' %></p>
+      </div>
+    <% end %>
+  </div>  
