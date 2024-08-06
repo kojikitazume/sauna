@@ -2,10 +2,9 @@ class SaunasController < ApplicationController
   def index
     @saunas = Sauna.all
 
-    # 検索機能
     if params[:query].present?
-      @saunas = @saunas.where('name ILIKE ? OR location ILIKE ? OR sauna_temperature::text ILIKE ? OR water_temperature::text ILIKE ? OR rolyu ILIKE ? OR aufguss ILIKE ? OR has_hot_spring ILIKE ?',
-                              "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
+      @saunas = @saunas.where('name ILIKE ? OR location ILIKE ?',
+                              "%#{params[:query]}%", "%#{params[:query]}%")
     end
 
     # フィルタリング機能
@@ -22,15 +21,15 @@ class SaunasController < ApplicationController
     end
 
     if params[:has_hot_spring].present?
-      @saunas = @saunas.where(has_hot_spring: params[:has_hot_spring])
+      @saunas = @saunas.where(has_hot_spring: params[:has_hot_spring] == 'true')
     end
 
     if params[:rolyu].present?
-      @saunas = @saunas.where(rolyu: params[:rolyu])
+      @saunas = @saunas.where(rolyu: params[:rolyu] == 'true')
     end
 
     if params[:aufguss].present?
-      @saunas = @saunas.where(aufguss: params[:aufguss])
+      @saunas = @saunas.where(aufguss: params[:aufguss] == 'true')
     end
   end
 
