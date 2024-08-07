@@ -22,7 +22,7 @@
             </button>
             <div class="dropdown-menu">
               <%= link_to 'プロフィール', edit_user_registration_path, class: 'dropdown-item' %>
-              <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item logout' %>
             </div>
           <% else %>
             <button class="navbar-toggler" type="button">
