@@ -31,6 +31,8 @@ class SaunasController < ApplicationController
     if params[:aufguss].present?
       @saunas = @saunas.where(aufguss: params[:aufguss] == 'true')
     end
+
+    @featured_saunas = Sauna.where(featured: true).limit(5)
   end
 
   def show

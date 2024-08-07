@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_06_100218) do
+ActiveRecord::Schema.define(version: 2024_08_07_125336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 2024_08_06_100218) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["sauna_id"], name: "index_bookmarks_on_sauna_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sauna_visits", force: :cascade do |t|
@@ -49,6 +56,7 @@ ActiveRecord::Schema.define(version: 2024_08_06_100218) do
     t.boolean "has_hot_spring", default: false
     t.text "description"
     t.boolean "onsen"
+    t.boolean "featured"
   end
 
   create_table "users", force: :cascade do |t|
