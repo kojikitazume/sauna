@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>EverydaySaunaApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,20 +12,40 @@
 
   <body>
     <header>
-      <nav>
-        <%= link_to 'ホーム', root_path %>
-        
-        <% if user_signed_in? %>
-          <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <%= link_to 'プロフィール', edit_user_registration_path %>
-        <% else %>
-          <%= link_to 'ログイン', new_user_session_path %>
-          <%= link_to '新規登録', new_user_registration_path %>
-          <%= link_to 'ゲストログイン', guest_login_path, class: 'btn btn-secondary' %>
-        <% end %>
+      <nav class="navbar">
+        <a href="<%= root_path %>" class="navbar-brand">Everyday Sauna</a>
+
+        <div class="navbar-menu">
+          <% if user_signed_in? %>
+            <button class="navbar-toggler" type="button">
+              <span class="sr-only">メニューを開く</span>☰
+            </button>
+            <div class="dropdown-menu">
+              <%= link_to 'プロフィール', edit_user_registration_path, class: 'dropdown-item' %>
+              <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+            </div>
+          <% else %>
+            <button class="navbar-toggler" type="button">
+              <span class="sr-only">メニューを開く</span>☰
+            </button>
+            <div class="dropdown-menu">
+              <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
+              <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
+              <%= link_to 'ゲストログイン', guest_login_path, class: 'dropdown-item' %>
+            </div>
+          <% end %>
+        </div>
       </nav>
     </header>
 
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Everyday Sauna App. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>
