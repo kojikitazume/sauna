@@ -1,43 +1,61 @@
-<h1><%= @sauna.name %></h1>
+<h1 class="sauna-name"><%= @sauna.name %></h1>
 
-<p>場所: <%= @sauna.location %></p>
-<p>サウナ温度: <%= @sauna.sauna_temperature %>℃</p>
-<p>水風呂温度: <%= @sauna.water_temperature %>℃</p>
+<div class="sauna-details">
+  <p><strong>場所:</strong> <%= @sauna.location %></p>
+  <p><strong>サウナ温度:</strong> <%= @sauna.sauna_temperature %>℃</p>
+  <p><strong>水風呂温度:</strong> <%= @sauna.water_temperature %>℃</p>
+</div>
 
-<h2>平均サ活時間</h2>
-<% if @average_times %>
-  <p>サウナ平均時間: <%= @average_times.avg_sauna_time.to_i %>分</p>
-  <p>水風呂平均時間: <%= @average_times.avg_water_time.to_i %>分</p>
-  <p>外気浴平均時間: <%= @average_times.avg_cooldown_time.to_i %>分</p>
-<% else %>
-  <p>まだサ活の記録がありません。</p>
-<% end %>
-
-<h2>サ活を記録する</h2>
-<%= form_with(model: [@sauna, @sauna_visit], local: true) do |f| %>
-  <%= f.hidden_field :sauna_id, value: @sauna.id %>
-  
-  <%= f.label :sauna_time, 'サウナ時間（分）' %>
-  <%= f.number_field :sauna_time, min: 0, step: 1 %>
-  
-  <%= f.label :water_time, '水風呂時間（分）' %>
-  <%= f.number_field :water_time, min: 0, step: 1 %>
-  
-  <%= f.label :cooldown_time, '外気浴時間（分）' %>
-  <%= f.number_field :cooldown_time, min: 0, step: 1 %>
-  
-  <%= f.label :comment, 'コメント' %>
-  <%= f.text_area :comment %>
-  
-  <%= f.submit 'サ活を記録' %>
-<% end %>
-
-<% if user_signed_in? %>
-  <% if current_user.bookmarks.exists?(sauna: @sauna) %>
-    <%= button_to '保存を解除', sauna_bookmark_path(@sauna), method: :delete %>
+<div class="average-times">
+  <h2>平均サ活時間</h2>
+  <% if @average_times %>
+    <ul>
+      <li>サウナ平均時間: <%= @average_times.avg_sauna_time.to_i %>分</li>
+      <li>水風呂平均時間: <%= @average_times.avg_water_time.to_i %>分</li>
+      <li>外気浴平均時間: <%= @average_times.avg_cooldown_time.to_i %>分</li>
+    </ul>
   <% else %>
-    <%= button_to '保存する', sauna_bookmark_path(@sauna), method: :post %>
+    <p>まだサ活の記録がありません。</p>
   <% end %>
-<% else %>
-  <p>ログインしてからブックマークできます。</p>
-<% end %>
+</div>
+
+<div class="record-visit">
+  <h2>サ活を記録する</h2>
+  <%= form_with(model: [@sauna, @sauna_visit], local: true, class: 'visit-form') do |f| %>
+    <%= f.hidden_field :sauna_id, value: @sauna.id %>
+
+    <div class="form-group">
+      <%= f.label :sauna_time, 'サウナ時間（分）' %>
+      <%= f.number_field :sauna_time, min: 0, step: 1, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :water_time, '水風呂時間（分）' %>
+      <%= f.number_field :water_time, min: 0, step: 1, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :cooldown_time, '外気浴時間（分）' %>
+      <%= f.number_field :cooldown_time, min: 0, step: 1, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :comment, 'コメント' %>
+      <%= f.text_area :comment, class: 'form-control' %>
+    </div>
+
+    <%= f.submit 'サ活を記録', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<div class="bookmark-actions">
+  <% if user_signed_in? %>
+    <% if current_user.bookmarks.exists?(sauna: @sauna) %>
+      <%= button_to '保存を解除', sauna_bookmark_path(@sauna), method: :delete, class: 'btn btn-secondary' %>
+    <% else %>
+      <%= button_to '保存する', sauna_bookmark_path(@sauna), method: :post, class: 'btn btn-primary' %>
+    <% end %>
+  <% else %>
+    <p>ログインしてからブックマークできます。</p>
+  <% end %>
+</div>
