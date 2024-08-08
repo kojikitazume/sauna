@@ -11,19 +11,19 @@
   </div>
 
   <div class="latest-posts">
-    <h2>新着サ活</h2>
-    <% if @latest_posts.present? %>
-      <% @latest_posts.each do |post| %>
-        <div class="post-card">
-          <h3><%= link_to post.title, post_path(post) %></h3>
-          <p><%= post.content.truncate(100) %></p>
-          <p><strong>投稿日:</strong> <%= post.created_at.strftime('%Y年%m月%d日') %></p>
-        </div>
-      <% end %>
-    <% else %>
-      <p>新着サ活はありません。</p>
+  <h2>新着サ活</h2>
+  <% if @latest_posts.present? %>
+    <% @latest_posts.each do |visit| %>
+      <div class="post-card">
+        <h3><%= link_to visit.sauna.name, sauna_path(visit.sauna) %></h3>
+        <p><%= visit.comment.truncate(100) %></p>
+        <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+      </div>
     <% end %>
-  </div>
+  <% else %>
+    <p>新着サ活はありません。</p>
+  <% end %>
+</div>
 
   <div class="featured-saunas">
     <h2>おすすめのサウナ施設</h2>
@@ -104,19 +104,19 @@
   </div>
 
   <div class="latest-posts">
-    <h2>新着サ活</h2>
-    <% if @latest_posts.present? %>
-      <% @latest_posts.each do |post| %>
-        <div class="post-card">
-          <h3><%= link_to post.title, post_path(post) %></h3>
-          <p><%= post.content.truncate(100) %></p>
-          <p><strong>投稿日:</strong> <%= post.created_at.strftime('%Y年%m月%d日') %></p>
-        </div>
-      <% end %>
-    <% else %>
-      <p>新着サ活はありません。</p>
+  <h2>新着サ活</h2>
+  <% if @latest_posts.present? %>
+    <% @latest_posts.each do |visit| %>
+      <div class="post-card">
+        <h3><%= link_to visit.sauna.name, sauna_path(visit.sauna) %></h3>
+        <p><%= visit.comment.truncate(100) %></p>
+        <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+      </div>
     <% end %>
-  </div>
+  <% else %>
+    <p>新着サ活はありません。</p>
+  <% end %>
+</div>
 
   <div class="featured-saunas">
     <h2>おすすめのサウナ施設</h2>

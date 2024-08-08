@@ -33,6 +33,9 @@ class SaunasController < ApplicationController
     end
 
     @featured_saunas = Sauna.where(featured: true).limit(5)
+
+    # 最新のサ活を5件取得
+    @latest_posts = SaunaVisit.order(created_at: :desc).limit(5)
   end
 
   def show
