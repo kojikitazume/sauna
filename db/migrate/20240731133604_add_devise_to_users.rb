@@ -1,23 +1,19 @@
+# frozen_string_literal: true
+
 class AddDeviseToUsers < ActiveRecord::Migration[6.1]
   def change
     change_table :users do |t|
       # Add columns only if they don't already exist
-      unless column_exists?(:users, :email)
-        t.string :email,              null: false, default: ""
-      end
+      t.string :email,              null: false, default: '' unless column_exists?(:users, :email)
 
-      unless column_exists?(:users, :encrypted_password)
-        t.string :encrypted_password, null: false, default: ""
-      end
+      t.string :encrypted_password, null: false, default: '' unless column_exists?(:users, :encrypted_password)
 
       unless column_exists?(:users, :reset_password_token)
         t.string   :reset_password_token
         t.datetime :reset_password_sent_at
       end
 
-      unless column_exists?(:users, :remember_created_at)
-        t.datetime :remember_created_at
-      end
+      t.datetime :remember_created_at unless column_exists?(:users, :remember_created_at)
     end
 
     # Add indexes after columns have been added

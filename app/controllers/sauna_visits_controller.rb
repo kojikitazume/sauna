@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SaunaVisitsController < ApplicationController
   def create
     @sauna_visit = current_user.sauna_visits.build(sauna_visit_params)

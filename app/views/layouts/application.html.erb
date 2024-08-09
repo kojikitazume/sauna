@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+    window.GOOGLE_MAPS_API_KEY = "<%= ENV['GOOGLE_MAPS_API_KEY'] %>";
+  </script>
   </head>
-
   <body>
     <header>
       <nav class="navbar">
         <a href="<%= root_path %>" class="navbar-brand">Everyday Sauna</a>
-
         <div class="navbar-menu">
           <% if user_signed_in? %>
             <button class="navbar-toggler" type="button">
@@ -37,11 +37,13 @@
         </div>
       </nav>
     </header>
-
+    <div class="featured-saunas">
+      <h2>近くのサウナ施設</h2>
+      <div id="map" style="height: 500px; width: 100%;"></div>
+    </div>
     <main>
-      <%= yield %>
+  <%= yield %>
     </main>
-
     <footer>
       <div class="container">
         <p>&copy; 2024 Everyday Sauna App. All rights reserved.</p>

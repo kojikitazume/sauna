@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
 class SaunasController < ApplicationController
+  include Gon::ControllerHelpers
+
   def index
     @saunas = Sauna.all
+    gon.saunas = @saunas.as_json(only: %i[name latitude longitude])
 
     if params[:query].present?
       @saunas = @saunas.where('name ILIKE ? OR location ILIKE ?',
@@ -8,29 +13,17 @@ class SaunasController < ApplicationController
     end
 
     # フィルタリング機能
-    if params[:temperature_min].present?
-      @saunas = @saunas.where('sauna_temperature >= ?', params[:temperature_min])
-    end
+    @saunas = @saunas.where('sauna_temperature >= ?', params[:temperature_min]) if params[:temperature_min].present?
 
-    if params[:temperature_max].present?
-      @saunas = @saunas.where('sauna_temperature <= ?', params[:temperature_max])
-    end
+    @saunas = @saunas.where('sauna_temperature <= ?', params[:temperature_max]) if params[:temperature_max].present?
 
-    if params[:location].present?
-      @saunas = @saunas.where('location ILIKE ?', "%#{params[:location]}%")
-    end
+    @saunas = @saunas.where('location ILIKE ?', "%#{params[:location]}%") if params[:location].present?
 
-    if params[:has_hot_spring].present?
-      @saunas = @saunas.where(has_hot_spring: params[:has_hot_spring] == 'true')
-    end
+    @saunas = @saunas.where(has_hot_spring: params[:has_hot_spring] == 'true') if params[:has_hot_spring].present?
 
-    if params[:rolyu].present?
-      @saunas = @saunas.where(rolyu: params[:rolyu] == 'true')
-    end
+    @saunas = @saunas.where(rolyu: params[:rolyu] == 'true') if params[:rolyu].present?
 
-    if params[:aufguss].present?
-      @saunas = @saunas.where(aufguss: params[:aufguss] == 'true')
-    end
+    @saunas = @saunas.where(aufguss: params[:aufguss] == 'true') if params[:aufguss].present?
 
     @featured_saunas = Sauna.where(featured: true).limit(5)
 
@@ -42,8 +35,8 @@ class SaunasController < ApplicationController
     @sauna = Sauna.find(params[:id])
     @sauna_visit = SaunaVisit.new
     @average_times = @sauna.sauna_visits
-                           .select('AVG(sauna_time) as avg_sauna_time, 
-                                    AVG(water_time) as avg_water_time, 
+                           .select('AVG(sauna_time) as avg_sauna_time,
+                                    AVG(water_time) as avg_water_time,
                                     AVG(cooldown_time) as avg_cooldown_time')
                            .take
   end

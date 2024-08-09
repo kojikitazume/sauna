@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def guest_login
     user = User.find_or_create_by(email: 'guest@example.com') do |u|
