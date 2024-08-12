@@ -11,30 +11,34 @@
   </div>
 
   <div class="latest-posts">
-  <h2>新着サ活</h2>
-  <% if @latest_posts.present? %>
-    <% @latest_posts.each do |visit| %>
-      <div class="post-card">
-        <h3><%= link_to visit.sauna.name, sauna_path(visit.sauna) %></h3>
-        <p><%= visit.comment.truncate(100) %></p>
-        <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+    <h2>新着サ活</h2>
+    <% if @latest_posts.present? %>
+      <div class="container">
+        <% @latest_posts.limit(3).each do |visit| %>
+          <div class="post-card">
+            <h3><%= link_to visit.sauna.name, sauna_path(visit.sauna) %></h3>
+            <p><%= visit.comment.truncate(100) %></p>
+            <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+          </div>
+        <% end %>
       </div>
+    <% else %>
+      <p>新着サ活はありません。</p>
     <% end %>
-  <% else %>
-    <p>新着サ活はありません。</p>
-  <% end %>
-</div>
+  </div>
 
-<div class="featured-saunas">
+  <div class="featured-saunas">
     <h2>おすすめのサウナ施設</h2>
     <% if @featured_saunas.present? %>
-      <% @featured_saunas.each do |sauna| %>
-        <div class="sauna-card">
-          <h3><%= link_to sauna.name, sauna_path(sauna) %></h3>
-          <p><strong>場所:</strong> <%= sauna.location %></p>
-          <p><strong>サウナ温度:</strong> <%= sauna.sauna_temperature %>℃</p>
-        </div>
-      <% end %>
+      <div class="container">
+        <% @featured_saunas.limit(3).each do |sauna| %> <!-- 最初の3つを表示 -->
+          <div class="sauna-card">
+            <h3><%= link_to sauna.name, sauna_path(sauna) %></h3>
+            <p><strong>場所:</strong> <%= sauna.location %></p>
+            <p><strong>サウナ温度:</strong> <%= sauna.sauna_temperature %>℃</p>
+          </div>
+        <% end %>
+      </div>
     <% else %>
       <p>おすすめのサウナ施設はありません。</p>
     <% end %>
@@ -104,30 +108,34 @@
   </div>
 
   <div class="latest-posts">
-  <h2>新着サ活</h2>
-  <% if @latest_posts.present? %>
-    <% @latest_posts.each do |visit| %>
-      <div class="post-card">
-        <h3><%= link_to visit.sauna.name, sauna_path(visit.sauna) %></h3>
-        <p><%= visit.comment.truncate(100) %></p>
-        <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+    <h2>新着サ活</h2>
+    <% if @latest_posts.present? %>
+      <div class="container">
+        <% @latest_posts.limit(3).each do |visit| %>
+          <div class="post-card">
+            <h3><%= link_to visit.sauna.name, sauna_path(visit.sauna) %></h3>
+            <p><%= visit.comment.truncate(100) %></p>
+            <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+          </div>
+        <% end %>
       </div>
+    <% else %>
+      <p>新着サ活はありません。</p>
     <% end %>
-  <% else %>
-    <p>新着サ活はありません。</p>
-  <% end %>
-</div>
+  </div>
 
   <div class="featured-saunas">
     <h2>おすすめのサウナ施設</h2>
     <% if @featured_saunas.present? %>
-      <% @featured_saunas.each do |sauna| %>
-        <div class="sauna-card">
-          <h3><%= link_to sauna.name, sauna_path(sauna) %></h3>
-          <p><strong>場所:</strong> <%= sauna.location %></p>
-          <p><strong>サウナ温度:</strong> <%= sauna.sauna_temperature %>℃</p>
-        </div>
-      <% end %>
+      <div class="container">
+        <% @featured_saunas.limit(3).each do |sauna| %>
+          <div class="sauna-card">
+            <h3><%= link_to sauna.name, sauna_path(sauna) %></h3>
+            <p><strong>場所:</strong> <%= sauna.location %></p>
+            <p><strong>サウナ温度:</strong> <%= sauna.sauna_temperature %>℃</p>
+          </div>
+        <% end %>
+      </div>
     <% else %>
       <p>おすすめのサウナ施設はありません。</p>
     <% end %>

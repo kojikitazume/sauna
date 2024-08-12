@@ -10,76 +10,77 @@ header {
   background-color: #343a40;
   color: #fff;
   padding: 10px 0;
+}
 
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
 
-    .navbar-brand {
-      font-size: 1.5em;
-      color: #fff;
-      text-decoration: none;
-    }
+.navbar-brand {
+  font-size: 1.5em;
+  color: #fff;
+  text-decoration: none;
+}
 
-    .navbar-menu {
-      display: flex;
-      align-items: center;
-      position: relative;
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 15px; /* メニュー項目間のスペース */
+}
 
-      .navbar-toggler {
-        background: none;
-        border: none;
-        color: #fff;
-        font-size: 1.2em;
-        cursor: pointer;
-        padding: 0.5em;
+.navbar-toggler {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0.5em;
 
-        &:focus {
-          outline: none;
-        }
-
-        &:hover {
-          color: #ddd;
-        }
-      }
-
-      .dropdown-menu {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        background-color: #343a40;
-        min-width: 160px;
-        z-index: 1000;
-
-        .dropdown-item {
-          color: #fff;
-          padding: 0.5em 1em;
-          text-decoration: none;
-          display: block;
-
-          &:hover {
-            background-color: #495057;
-          }
-        }
-
-        .dropdown-item.logout {
-          background-color: #343a40;
-          color: #fff;
-
-          &:hover {
-            background-color: #495057;
-          }
-        }
-      }
-
-      .dropdown-menu.show {
-        display: block;
-      }
-    }
+  &:focus {
+    outline: none;
   }
+
+  &:hover {
+    color: #ddd;
+  }
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #343a40;
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  color: #fff;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  display: block;
+
+  &:hover {
+    background-color: #495057;
+  }
+}
+
+.dropdown-item.logout {
+  background-color: #343a40;
+  color: #fff;
+
+  &:hover {
+    background-color: #495057;
+  }
+}
+
+.dropdown-menu.show {
+  display: block;
 }
 
 footer {
@@ -87,15 +88,27 @@ footer {
   color: #fff;
   padding: 10px 0;
   text-align: center;
+}
 
-  .container {
-    padding: 0 15px;
-  }
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* 要素間のスペースを設定 */
+  padding: 20px;
+}
+
+.main-content {
+  flex: 3;
+  margin-right: 20px;
+}
+
+.sidebar {
+  flex: 1;
 }
 
 main {
   padding: 20px;
-  text-align: center; // 追加: main 内のテキストを中央揃えに
+  text-align: center; /* main 内のテキストを中央揃えに */
 }
 
 .sauna-name {
@@ -104,12 +117,12 @@ main {
 }
 
 .sauna-details, .average-times, .record-visit, .bookmark-actions {
-  margin: 0 auto 20px; // 修正: 中央に配置
+  margin: 0 auto 20px; /* 中央に配置 */
   padding: 20px;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px; // 最大幅を設定
+  max-width: 800px; /* 最大幅を設定 */
 }
 
 .record-visit .form-group {
@@ -121,7 +134,7 @@ main {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  box-sizing: border-box; // 追加: ボックスサイズを含める
+  box-sizing: border-box; /* ボックスサイズを含める */
 }
 
 .btn-primary {
@@ -131,7 +144,7 @@ main {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  text-align: center; // 追加: ボタンのテキストを中央揃えに
+  text-align: center; /* ボタンのテキストを中央揃えに */
 
   &:hover {
     background-color: #0056b3;
@@ -145,7 +158,7 @@ main {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  text-align: center; // 追加: ボタンのテキストを中央揃えに
+  text-align: center; /* ボタンのテキストを中央揃えに */
 
   &:hover {
     background-color: #5a6268;
@@ -160,4 +173,36 @@ ul {
 
 li {
   padding: 10px 0;
+}
+
+.sauna-card, .post-card {
+  flex: 1 1 calc(33.333% - 20px); /* 幅を3列にし、要素が親要素の幅を超えないようにする */
+  margin: 10px; /* カード間にスペースを追加 */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px; /* 要素間のスペースを設定 */
+  margin-bottom: 20px;
+}
+
+.search-form .form-group {
+  flex: 1; /* 要素が利用可能なスペースを均等に使う */
+}
+
+.featured-saunas, .latest-posts {
+  margin-bottom: 20px; /* 各セクション間のスペース */
+}
+
+.post-card {
+  margin-bottom: 15px; /* 各カード間のスペース */
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
