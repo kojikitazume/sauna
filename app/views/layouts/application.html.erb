@@ -8,8 +8,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script>
-    window.GOOGLE_MAPS_API_KEY = "<%= ENV['GOOGLE_MAPS_API_KEY'] %>";
-  </script>
+      window.GOOGLE_MAPS_API_KEY = "<%= ENV['GOOGLE_MAPS_API_KEY'] %>";
+    </script>
   </head>
   <body>
     <header>
@@ -21,7 +21,8 @@
               <span class="sr-only">メニューを開く</span>☰
             </button>
             <div class="dropdown-menu">
-              <%= link_to 'プロフィール', edit_user_registration_path, class: 'dropdown-item' %>
+              <%= link_to 'プロフィール', user_path(current_user), class: 'dropdown-item' %> <!-- プロフィールページへのリンク -->
+              <%= link_to 'プロフィール編集', edit_user_registration_path, class: 'dropdown-item' %>
               <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item logout' %>
             </div>
           <% else %>
@@ -39,10 +40,10 @@
     </header>
     <div class="featured-saunas">
       <h2>近くのサウナ施設</h2>
-      <div id="map" style="height: 500px; width: 100%;"></div>
+      <div id="map" style="height: 300px; width: 100%;"></div>
     </div>
     <main>
-  <%= yield %>
+      <%= yield %>
     </main>
     <footer>
       <div class="container">

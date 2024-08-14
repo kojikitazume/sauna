@@ -1,12 +1,29 @@
-# frozen_string_literal: true
-
 class UsersController < ApplicationController
-  def guest_login
-    user = User.find_or_create_by(email: 'guest@example.com') do |u|
-      u.password = 'password'
-      u.password_confirmation = 'password'
+  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update]
+
+  def show
+    @sauna_visits = @user.sauna_visits # ユーザーのサ活履歴を取得
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to @user, notice: 'プロフィールが更新されました。'
+    else
+      render :edit
     end
-    sign_in(user)
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+  private
+
+  def set_user
+    @user = current_user
+  end
+
+  def user_params
+    params.require(:user).permit(:avatar, :bio)
   end
 end

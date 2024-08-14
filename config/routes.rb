@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   # ルートページ
   root 'saunas#index'
 
-  # サウナリソース
+  resource :user, only: [:show, :edit, :update]
   resources :saunas, only: %i[index show] do
-    resources :sauna_visits, only: [:create]
-    resource :bookmark, only: %i[create destroy]
+  resources :sauna_visits, only: [:create]
+  resource :bookmark, only: %i[create destroy]
   end
 end

@@ -1,18 +1,18 @@
 <h1 class="sauna-name"><%= @sauna.name %></h1>
 
-<div class="sauna-details">
-  <p><strong>場所:</strong> <%= @sauna.location %></p>
-  <p><strong>サウナ温度:</strong> <%= @sauna.sauna_temperature %>℃</p>
-  <p><strong>水風呂温度:</strong> <%= @sauna.water_temperature %>℃</p>
+<div class="sauna-info">
+  <p class="sauna-location"><strong>場所:</strong> <%= @sauna.location %></p>
+  <p class="sauna-temperature"><strong>サウナ温度:</strong> <%= @sauna.sauna_temperature %>℃</p>
+  <p class="water-temperature"><strong>水風呂温度:</strong> <%= @sauna.water_temperature %>℃</p>
 </div>
 
 <div class="average-times">
   <h2>平均サ活時間</h2>
   <% if @average_times %>
     <ul>
-      <li>サウナ平均時間: <%= @average_times.avg_sauna_time.to_i %>分</li>
-      <li>水風呂平均時間: <%= @average_times.avg_water_time.to_i %>分</li>
-      <li>外気浴平均時間: <%= @average_times.avg_cooldown_time.to_i %>分</li>
+      <li><strong>サウナ平均時間:</strong> <%= @average_times.avg_sauna_time.to_i %>分</li>
+      <li><strong>水風呂平均時間:</strong> <%= @average_times.avg_water_time.to_i %>分</li>
+      <li><strong>外気浴平均時間:</strong> <%= @average_times.avg_cooldown_time.to_i %>分</li>
     </ul>
   <% else %>
     <p>まだサ活の記録がありません。</p>
@@ -22,8 +22,6 @@
 <div class="record-visit">
   <h2>サ活を記録する</h2>
   <%= form_with(model: [@sauna, @sauna_visit], local: true, class: 'visit-form') do |f| %>
-    <%= f.hidden_field :sauna_id, value: @sauna.id %>
-
     <div class="form-group">
       <%= f.label :sauna_time, 'サウナ時間（分）' %>
       <%= f.number_field :sauna_time, min: 0, step: 1, class: 'form-control' %>
