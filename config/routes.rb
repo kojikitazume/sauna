@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root 'saunas#index'
 
   resource :user, only: [:show, :edit, :update]
-  resources :saunas, only: %i[index show] do
+  resources :saunas, only: %i[index show new create] do
   resources :sauna_visits, only: [:create]
   resource :bookmark, only: %i[create destroy]
   end

@@ -1,5 +1,11 @@
 <h1 class="sauna-name"><%= @sauna.name %></h1>
 
+<% if @sauna.image.attached? %>
+  <div class="sauna-image">
+    <%= image_tag @sauna.image, alt: @sauna.name, class: 'sauna-image' %>
+  </div>
+<% end %>
+
 <div class="sauna-info">
   <p class="sauna-location"><strong>場所:</strong> <%= @sauna.location %></p>
   <p class="sauna-temperature"><strong>サウナ温度:</strong> <%= @sauna.sauna_temperature %>℃</p>

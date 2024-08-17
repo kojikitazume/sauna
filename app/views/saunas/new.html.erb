@@ -1,0 +1,39 @@
+<h1>サウナ施設の登録</h1>
+
+<%= form_with model: @sauna, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :name, 'サウナの名前' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :location, '所在地' %>
+    <%= form.text_field :location, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :sauna_temperature, 'サウナ室の温度' %>
+    <%= form.number_field :sauna_temperature, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :water_temperature, '水風呂の温度' %>
+    <%= form.number_field :water_temperature, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, '説明' %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+
+  <%= form.submit '登録', class: 'btn btn-primary' %>
+<% end %>

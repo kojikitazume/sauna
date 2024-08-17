@@ -40,4 +40,26 @@ class SaunasController < ApplicationController
                                     AVG(cooldown_time) as avg_cooldown_time')
                            .take
   end
+
+  # サウナ施設の新規作成用のアクション
+  def new
+    @sauna = Sauna.new
+  end
+
+  # サウナ施設の登録用のアクション
+  def create
+    @sauna = Sauna.new(sauna_params)
+    if @sauna.save
+      redirect_to sauna_path(@sauna), notice: 'サウナ施設が登録されました。'
+    else
+      render :new
+    end
+  end
+
+  private
+
+  # サウナ施設のパラメータを許可
+  def sauna_params
+    params.require(:sauna).permit(:name, :location, :image, :sauna_temperature, :water_temperature, :description, :has_hot_spring, :rolyu, :aufguss)
+  end
 end
