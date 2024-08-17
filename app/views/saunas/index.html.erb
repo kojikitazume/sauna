@@ -82,8 +82,14 @@
   <% end %>
 
   <div class="sauna-list">
-    <% @saunas.each do |sauna| %>
-      <div class="sauna-card">
+  <% @saunas.each do |sauna| %>
+    <div class="sauna-card">
+      <% if sauna.image.attached? %>
+        <div class="sauna-image-container">
+          <%= image_tag sauna.image, alt: sauna.name, class: 'sauna-image' %>
+        </div>
+      <% end %>
+      <div class="sauna-info">
         <h2><%= link_to sauna.name, sauna_path(sauna), class: 'sauna-name' %></h2>
         <p><strong>場所:</strong> <%= sauna.location %></p>
         <p><strong>サウナ温度:</strong> <%= sauna.sauna_temperature %>℃</p>
@@ -92,8 +98,10 @@
         <p><strong>アウフグース:</strong> <%= sauna.aufguss ? '有り' : '無し' %></p>
         <p><strong>温泉の有無:</strong> <%= sauna.has_hot_spring ? '有り' : '無し' %></p>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
+
 <% else %>
   <!-- ログインしていないユーザー向けのコンテンツ -->
   <div class="intro-section">
