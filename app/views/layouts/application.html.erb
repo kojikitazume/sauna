@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>EverydaySaunaApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
+<head>
+  <title>EverydaySaunaApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script>
+    window.GOOGLE_MAPS_API_KEY = "<%= ENV['GOOGLE_MAPS_API_KEY'] %>";
+    // デバッグ用: gonのデータをJavaScriptに渡す
+    <% if defined?(gon) && gon.saunas.present? %>
+      window.gon = <%= raw gon.saunas.to_json %>;
+    <% else %>
+      window.gon = [];
+    <% end %>
+  </script>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="<%= root_path %>" class="navbar-brand">Everyday Sauna</a>
+      <div class="navbar-menu">
+        <% if user_signed_in? %>
+          <button class="navbar-toggler" type="button">
+            <span class="sr-only">メニューを開く</span>☰
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to 'プロフィール', user_path(current_user), class: 'dropdown-item' %>
+            <%= link_to 'プロフィール編集', edit_user_registration_path, class: 'dropdown-item' %>
+            <%= link_to 'サウナ施設を登録', new_sauna_path, class: 'dropdown-item' %>
+            <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item logout' %>
+          </div>
+        <% else %>
+          <button class="navbar-toggler" type="button">
+            <span class="sr-only">メニューを開く</span>☰
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
+            <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
+            <%= link_to 'ゲストログイン', guest_login_path, class: 'dropdown-item' %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+  </header>
+  <div class="featured-saunas">
+    <h2>近くのサウナ施設</h2>
+    <div id="map" style="height: 300px; width: 100%;"></div>
+  </div>
+  <main>
     <%= yield %>
-  </body>
+  </main>
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Everyday Sauna App. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
 </html>

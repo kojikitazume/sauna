@@ -1,0 +1,19 @@
+<h1><%= @user.name %>さんのプロフィール</h1>
+
+<%= image_tag @user.avatar if @user.avatar.attached? %>
+<p><strong>自己紹介:</strong> <%= @user.bio %></p>
+
+<h2>過去のサ活履歴</h2>
+<% if @sauna_visits.present? %>
+  <ul>
+    <% @sauna_visits.each do |visit| %>
+      <li>
+        <strong>サウナ:</strong> <%= link_to visit.sauna.name, sauna_path(visit.sauna) %>
+        <p><%= visit.comment %></p>
+        <p><strong>投稿日:</strong> <%= visit.created_at.strftime('%Y年%m月%d日') %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>サ活履歴がありません。</p>
+<% end %>
